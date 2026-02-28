@@ -1,0 +1,20 @@
+{
+	"name": "experimental-my-nikora-extension",
+	"description": "filter vacancy by id on my.nikoratrade.ge",
+	"version": "1.0",
+	"manifest_version": 3,
+	"permissions": ["storage", "activeTab"],
+	"content_scripts": [
+		{
+			"matches": ["https://my.nikoratrade.ge/*"],
+			"js": ["src/content.tsx"],
+
+			"all_frames": true,
+			"run_at": "document_end"
+		}
+	],
+	"action": {
+		"default_popup": "index.html",
+		"default_icon": { "16": "public/icon.png", "24": "public/icon.png", "32": "public/icon.png" }
+	}
+}

@@ -1,0 +1,27 @@
+.favorite-header {
+	background: rgba(144, 238, 144, 0.5);
+}
+.favorite {
+	background: rgba(144, 238, 144, 0.5);
+	order: -1;
+}
+
+.fav-star {
+	height: 33px;
+	width: 33px;
+	fill: #cacaca;
+	stroke: #cacaca;
+}
+.fav-star-active {
+	fill: #ffd91d !important;
+	stroke: #ffd91d !important;
+}
+.fav-btn {
+	border: none;
+	background-color: #6a6a67;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 54px;
+	height: 44px;
+}
