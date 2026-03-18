@@ -1,12 +1,17 @@
 class appState {
-	//  ID-ების მასივი
+	// ID-ების მასივი
 	config: string[] = []
-	readonly DEFAULT_IDS: string[] = [] as const
+	// gitignore
+	readonly DEFAULT_IDS: string[] = import.meta.env.VITE_DEFAULT_IDS
+		? import.meta.env.VITE_DEFAULT_IDS.split(',')
+		: ([] as const)
 	// ცვლადი, რომელიც მიგვანიშნებს, დასრულდა თუ არა მონაცემების ჩატვირთვა storage-დან
 	isInited = false
 
 	// ფუნქცია chrome.storage-დან მონაცემების წამოსაღებად
 	async getConfig() {
+		console.log(this.DEFAULT_IDS);
+		
 		const storage = await chrome.storage.local.get()
 		const storageConfig = storage ? (storage?.config as string[]) : null
 
