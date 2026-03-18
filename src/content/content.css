@@ -1,11 +1,16 @@
 .favorite-header {
-	background: rgba(144, 238, 144, 0.5);
+	background-color: rgba(144, 238, 144, 0.5) !important
 }
-.favorite {
-	background: rgba(144, 238, 144, 0.5);
+.favorite-card {
+	background: rgba(144, 238, 144, 0.5) !important;
 	order: -1;
 }
-
+.favorite-card > ons-list-item{
+	padding-inline: 7.5px !important;
+}
+.regular-card > ons-list-item{
+	padding-inline: 7.5px !important;
+}
 .fav-star {
 	height: 33px;
 	width: 33px;

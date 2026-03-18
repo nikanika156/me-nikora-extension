@@ -3,7 +3,7 @@
 	"description": "filter vacancy by id on my.nikoratrade.ge",
 	"version": "1.0",
 	"manifest_version": 3,
-	"permissions": ["storage", "activeTab"],
+	"permissions": ["storage"],
 	"content_scripts": [
 		{
 			"matches": ["https://my.nikoratrade.ge/*"],

@@ -1,10 +1,17 @@
 import { state } from './state'
-import { observer } from './content/observer'
-import './index.css'
+import { handleObserver } from './content/observer'
+import { customListPage } from './content/ui/custom-list-page'
+
+
 async function startApp() {
+	//@ts-ignore
+	window.testAdd = state.testAdd.bind(state)
+	//@ts-ignore
+	window.state = state
+	//@ts-ignore
+	window.updateList = customListPage
 	await state.getConfig()
-	state.remove('744')
-	// console.log('starting observer')
-	observer()
+	handleObserver()
+
 }
 startApp()

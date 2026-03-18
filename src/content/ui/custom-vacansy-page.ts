@@ -1,12 +1,16 @@
 import { SELECTORS } from '../../selectors'
 import { createIcons, Star } from 'lucide'
 import { state } from '../../state'
+
 export function customVacansyPage() {
+
 	const shopId = document
 		.querySelector<HTMLElement>(SELECTORS.VACANSY_SHOP_ID)
 		?.innerText.split('#')[1]
 	const buttonsContainer = document.querySelector(SELECTORS.BUTTONS_CONTAINER)
 	if (buttonsContainer && shopId) {
+		if (state.DEFAULT_IDS.includes(shopId)) return
+
 		const isExist = () => state.config.includes(shopId)
 		const favButton = document.createElement('button')
 		const starIcon = document.createElement('i')
@@ -34,7 +38,4 @@ export function customVacansyPage() {
 		})
 	}
 
-	// Note: Accessing the SVG's internal DOM via the objectElement's
-	// .contentDocument property is subject to the same-origin policy
-	// and requires a 'load' event listener.
 }

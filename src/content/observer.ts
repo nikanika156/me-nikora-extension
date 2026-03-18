@@ -1,33 +1,8 @@
-import { SELECTORS } from '../selectors'
-import { tasker } from './tasker'
+import { handlePageChange } from './handle-page-change'
 
-let observeBody: MutationObserver | null = null
-let observeContainer: MutationObserver | null = null
-function launchContainerObserver() {
-	const listPage = document.querySelector(SELECTORS.LIST_PAGE)
-	const mainList = document.querySelector(SELECTORS.MAIN_LIST)
-	if (listPage && mainList) {
-		tasker()
-		observeContainer?.observe(listPage, { childList: true })
-		observeBody?.disconnect()
-	}
-
-  
-}
-
-
-export function observer() {
-	//
-	
-
-
-  
-	if (observeBody) observeBody.disconnect()
-	if (observeContainer) observeContainer.disconnect()
-	//
-	//
-	observeBody = new MutationObserver(launchContainerObserver)
-	observeContainer = new MutationObserver(tasker)
-
-	observeBody.observe(document.body, { childList: true, subtree: true })
+  export let observer: MutationObserver | null = null 
+export function handleObserver() {
+	if (observer) observer.disconnect()
+	observer = new MutationObserver(handlePageChange)
+	observer.observe(document.body, { childList: true, subtree: true })
 }
