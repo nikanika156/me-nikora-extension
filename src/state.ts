@@ -1,7 +1,7 @@
 class appState {
 	//  ID-ების მასივი
 	config: string[] = []
-	readonly DEFAULT_IDS: string[] = ['268', '002', '125', '450', '858'] as const
+	readonly DEFAULT_IDS: string[] = [] as const
 	// ცვლადი, რომელიც მიგვანიშნებს, დასრულდა თუ არა მონაცემების ჩატვირთვა storage-დან
 	isInited = false
 
@@ -55,7 +55,7 @@ class appState {
 			const newConfig = this.config.filter(item => item != id)
 			this.setConfig(newConfig)
 			console.log(`#${id} was successfuly removed`)
-		}else{
+		} else {
 			console.error(`#${id} is not exist`)
 			return
 		}
