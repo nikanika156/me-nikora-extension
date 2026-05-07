@@ -1,3 +1,4 @@
+export const checkAlarm = { name: 'CHECK_JOBS', interval: 1 }
 export const api = {
 	reserve: 'https://my.nikoratrade.ge/api/reserve' as const,
 	init: 'https://my.nikoratrade.ge/api/init' as const,

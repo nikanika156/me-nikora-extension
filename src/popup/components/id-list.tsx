@@ -1,7 +1,4 @@
 import { useEffect, useState } from 'react'
-import { sendExtensionMessage } from '../../shared/send-extension-message'
-
-import type { GetConfig } from '../../shared/types/types'
 import { ListItem } from './list-item'
 import { favorite } from '../../favorite'
 
@@ -12,10 +9,7 @@ export function IdList() {
 	}>()
 
 	useEffect(() => {
-		const handleChange = (
-			change: { config?: { newValue: string[]; oldValue: string } },
-			areaName: string,
-		) => {
+		const handleChange = (change: { config?: { newValue: string[]; oldValue: string } }) => {
 			if (change.config?.newValue)
 				setIds({
 					config: change.config.newValue,

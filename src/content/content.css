@@ -1,14 +1,14 @@
 .favorite-header {
-	background-color: rgba(144, 238, 144, 0.5) !important
+	background-color: rgba(144, 238, 144, 0.5) !important;
 }
 .favorite-card {
 	background: rgba(144, 238, 144, 0.5) !important;
 	order: -1;
 }
-.favorite-card > ons-list-item{
+.favorite-card > ons-list-item {
 	padding-inline: 7.5px !important;
 }
-.regular-card > ons-list-item{
+.regular-card > ons-list-item {
 	padding-inline: 7.5px !important;
 }
 .fav-star {
@@ -16,6 +16,7 @@
 	width: 33px;
 	fill: #cacaca;
 	stroke: #cacaca;
+
 }
 .fav-star-active {
 	fill: #ffd91d !important;

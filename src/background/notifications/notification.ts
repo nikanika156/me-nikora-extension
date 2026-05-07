@@ -1,3 +1,5 @@
+import { favorite } from '../../favorite'
+import type { ReserveItem } from '../../shared/types/api'
 import type { VacansyBasicNotification } from '../../shared/types/notifications'
 
 class Notification {
@@ -5,12 +7,10 @@ class Notification {
 		const allNotifications = await chrome.notifications.getAll()
 		return Object.keys(allNotifications).every(x => x !== notificationId)
 	}
-	async isActual(currentApiIds: string[], notificationId: string) {
-		const allNotifications = await chrome.notifications.getAll()
-		const visibleNotifications = Object.keys(allNotifications)
-		for (const id of visibleNotifications) {
-			return currentApiIds.every(x => x !== id)
-		}
+	isActual(currentApiIds: ReserveItem[], notificationId: string) {
+		const idByNotification = Number(notificationId.split('-')[1])
+		const shopCode = new Set([...favorite.config, ...favorite.IMMUTABLE_IDS])
+		return currentApiIds.some(x => x.id === idByNotification && shopCode.has(x.shop.code))
 	}
 	async update(notificationId: string, options: chrome.notifications.NotificationOptions) {
 		if (await this.canBeAdded(notificationId))
@@ -23,7 +23,7 @@ class Notification {
 	async vacansyBasic(
 		{ id, shopCode, schedule, position }: VacansyBasicNotification,
 		title = 'ნიკორას ახალი ვაკანსია',
-		priority = 2,
+		priority: -2 | -1 | 0 | 1 | 2 = 2,
 	) {
 		try {
 			const isNotExist = await this.canBeAdded(id)
@@ -53,6 +53,24 @@ class Notification {
 			throw e
 		}
 	}
-	async vacansyList({}) {}
+	async alarmNotification(
+		id: string,
+		title: string,
+		message: string,
+		priority: -2 | -1 | 0 | 1 | 2 = 2,
+	) {
+		const isExist = !this.canBeAdded(id)
+		if (isExist) return
+		const notificationOptions: chrome.notifications.NotificationCreateOptions = {
+			title: title,
+			type: 'basic',
+
+			message: message,
+			iconUrl: chrome.runtime.getURL('icon.png'),
+
+			priority: priority,
+		}
+		chrome.notifications.create(id, notificationOptions)
+	}
 }
 export const notification = new Notification()

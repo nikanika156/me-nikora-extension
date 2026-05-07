@@ -4,14 +4,18 @@ import { handleObserver } from './content/observer'
 import { getAuthKey } from './content/api/get-auth-key'
 import { favorite } from './favorite'
 import { filterListById } from './content/ui/custom-list-page'
-import { SELECTORS } from './content/selectors'
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-	sender
+
+import { customVacansyPage } from './content/ui/custom-vacansy-page'
+
+chrome.runtime.onMessage.addListener(async (message: any) => {
 	if (message.action == 'GET_AUTH') {
-		sendResponse(getAuthKey())
-		return true
+		const token = getAuthKey()
+		return token
+	} else if (message.action == '123') {
+		return 'dsvdvwc'
 	}
 })
+
 async function startApp() {
 	// //@ts-ignore
 	// window.testAdd = state.testAdd.bind(state)
@@ -22,14 +26,9 @@ async function startApp() {
 	// //
 	await favorite.getList()
 	handleObserver()
-	chrome.storage.onChanged.addListener(
-		(change: { config?: { oldValue: string[]; newValue: string[] } }, areaName: string) => {
-			console.log(filterListById([...favorite.IMMUTABLE_IDS, ...change.config!.newValue]))
-			console.log(change)
-			// console.log('qfeq')
-
-			// }
-		},
-	)
+	favorite.onChange(() => {
+		filterListById()
+		customVacansyPage()
+	})
 }
 startApp()

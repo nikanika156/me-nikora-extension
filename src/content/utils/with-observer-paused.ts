@@ -1,3 +1,5 @@
+import { observerOptions, observerPath } from '../observer'
+
 // For functions that changes DOM
 export function withObserverPaused(mutationObserver: MutationObserver, callback: () => void) {
 	mutationObserver.disconnect()
@@ -6,6 +8,6 @@ export function withObserverPaused(mutationObserver: MutationObserver, callback:
 	} catch {
 		console.log('callback error')
 	} finally {
-		mutationObserver.observe(document.body, { childList: true, subtree: true })
+		mutationObserver.observe(observerPath, observerOptions)
 	}
 }

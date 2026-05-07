@@ -2,7 +2,7 @@ import { favorite } from '../../favorite'
 import { SELECTORS } from '../selectors'
 import '../content.css'
 // let count = 0
-export const filterListById = (ids: string[]) => {
+export const filterListById = () => {
 	const mainList = document.querySelector<HTMLElement>(SELECTORS.MAIN_LIST)
 	if (!mainList) return
 	console.log('ijij')
@@ -12,7 +12,7 @@ export const filterListById = (ids: string[]) => {
 	for (const card of mainList?.children) {
 		const cardHeader = card.querySelector('ons-list-header')
 		const shopId = cardHeader?.textContent.split('#')[1]
-		const isCardfavorite = ids.includes(shopId!)
+		const isCardfavorite = favorite.includes(shopId!)
 		// console.log(shopId)
 		cardHeader?.classList.toggle('favorite-header', isCardfavorite)
 		card.classList.toggle('favorite-card', isCardfavorite)

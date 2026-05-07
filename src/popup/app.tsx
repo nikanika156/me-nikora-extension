@@ -1,8 +1,13 @@
 import './index.css'
-import { Input } from './components/input'
+
 import { IdList } from './components/id-list'
 import { favorite } from '../favorite'
 import { useEffect, useState } from 'react'
+import { IdAddInput } from './components/id-add-input'
+import { Button } from './components/button'
+import { Navbar } from './components/navbar'
+import { BrowserRouter, Route, Routes } from 'react-router'
+import { Home } from './pages/home'
 export function App() {
 	const [isInited, setIsInited] = useState(false)
 
@@ -25,8 +30,12 @@ export function App() {
 			>
 				{isInited && (
 					<>
-						<Input />
-						<IdList />
+						<Navbar />
+						<Routes>
+							<Route path='/index.html' element={<Home />}>
+								<Route path='debug' />
+							</Route>
+						</Routes>
 					</>
 				)}
 			</div>

@@ -6,6 +6,7 @@ export type Actions =
 	| 'GET_AUTH'
 	| 'TOGGLE_ID'
 	| 'INCLUDES_ID'
+	|'GET_LOCATION'
 export interface Message<T> {
 	action: Actions
 	data?: T | string
