@@ -4,6 +4,8 @@ export class Favorite {
 	private onChangeArr: ((chnage: chrome.storage.StorageChange) => void)[] = []
 	constructor() {
 		chrome.storage.onChanged.addListener(change => {
+
+			
 			const newVal = change.config.newValue as string[]
 			this.config = newVal
 			// }}

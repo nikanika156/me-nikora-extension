@@ -1,39 +1,29 @@
-import { SELECTORS } from '../selectors'
+import { VACANSY_SELECTORS } from '../selectors'
 import { createIcons, Star } from 'lucide'
 
 import { sendExtensionMessage } from '../../shared/send-extension-message'
 import type { ReserveItem } from '../../shared/types/api'
 import { favorite } from '../../favorite'
-// import { ffavorite } from '../../content'
+import { customMapWithLink } from './custom-components/custom-map-with-link'
 
 export async function customVacansyPage() {
-	const vacansyPage = document.querySelector(SELECTORS.VACANSY_PAGE)
-	if (!vacansyPage) return
+	if (document.getElementById('favButton')) return true
+	if (!document.querySelector(VACANSY_SELECTORS.PAGE)) return false
 	const shopId = document
-		.querySelector<HTMLElement>(SELECTORS.VACANSY_SHOP_ID)
+		.querySelector<HTMLElement>(VACANSY_SELECTORS.SHOP_ID)
 		?.innerText.split('#')[1]
-	const isExist = () => favorite.includes(shopId!)
-	if (document.getElementById('favButton') || favorite.IMMUTABLE_IDS.includes(shopId!)) {
+
+	if (favorite.IMMUTABLE_IDS.includes(shopId!)) {
 		const favStar = document.querySelector('.fav-star')?.classList
-		favStar?.toggle('fav-star-active', isExist())
+		favStar?.toggle('fav-star-active', favorite.includes(shopId!))
 		return
 	}
-	const buttonsContainer = document.querySelector(SELECTORS.BUTTONS_CONTAINER)
-	const vacansyMapLink = document.querySelector<HTMLAnchorElement>(SELECTORS.VACANSY_MAP_LINK)
+	const buttonsContainer = document.querySelector(VACANSY_SELECTORS.BUTTONS_CONTAINER)
+	const vacansyMapLink = document.querySelector<HTMLAnchorElement>(VACANSY_SELECTORS.MAP_LINK)
 
-	if (buttonsContainer && shopId && vacansyMapLink) {
-		const vacansyObj = await sendExtensionMessage<string, ReserveItem>('GET_LOCATION', shopId)
-		// console.log();
-		
-		// if (notNecassary) return
-		const mLon = vacansyObj.shop.map.split(',')[1]
-		const mLan = vacansyObj.shop.map.split(',')[0]
-		console.log(mLon,mLan);
-		
-		const openStreetMap = `https://www.openstreetmap.org/?mlat=${mLan}&mlon=${mLon}&zoom=16`
-		// const googleMap = `https://www.google.com/maps/search/?api=1&query=${mLon},${mLan}`
-		// vacansyMapLink.href = googleMap
-		vacansyMapLink.href = openStreetMap
+	if (buttonsContainer && shopId) {
+		const isExist = favorite.includes(shopId!)
+		customMapWithLink(shopId)
 		const favButton = document.createElement('button')
 		const starIcon = document.createElement('i')
 		favButton.id = 'favButton'
@@ -41,13 +31,13 @@ export async function customVacansyPage() {
 		starIcon.classList = 'fav-star'
 		starIcon.setAttribute('data-lucide', 'star')
 
-		starIcon.classList.toggle('fav-star-active', isExist())
+		starIcon.classList.toggle('fav-star-active', isExist)
 		//
 		favButton.onclick = () => {
 			const favStar = document.querySelector('.fav-star')?.classList
 
 			console.log(favorite.toggle(shopId!).message)
-			favStar?.toggle('fav-star-active', isExist())
+			favStar?.toggle('fav-star-active', isExist)
 			console.log(favorite)
 		}
 

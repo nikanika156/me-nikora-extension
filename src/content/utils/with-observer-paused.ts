@@ -4,7 +4,7 @@ import { observerOptions, observerPath } from '../observer'
 export function withObserverPaused(mutationObserver: MutationObserver, callback: () => void) {
 	mutationObserver.disconnect()
 	try {
-		callback()
+		callback() 
 	} catch {
 		console.log('callback error')
 	} finally {

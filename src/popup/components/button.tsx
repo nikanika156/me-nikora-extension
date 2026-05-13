@@ -2,7 +2,7 @@ import { type LucideProps } from 'lucide-react'
 
 interface Button {
 	callBack: () => void | Promise<void>
-	Icon: React.ForwardRefExoticComponent<
+	Icon?: React.ForwardRefExoticComponent<
 		Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>
 	>
 	text?: string
@@ -21,7 +21,7 @@ export function Button({ callBack, Icon, text, size, isActive = true }: Button) 
 			disabled={!isActive}
 			className={`flex items-center cursor-pointer disabled:cursor-not-allowed  bg-[#820024] text-white px-2 py-1.5 disabled:bg-[#ccc]`}
 		>
-			<Icon size={size} />
+			{Icon && <Icon size={size} />}
 			<p style={{ fontSize: size }}>{text}</p>
 		</button>
 	)
