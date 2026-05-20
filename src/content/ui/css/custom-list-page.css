@@ -1,0 +1,45 @@
+.favorite-header {
+	background-color: rgba(144, 238, 144, 0.5) !important;
+}
+.favorite-card {
+	background: rgba(144, 238, 144, 0.5) !important;
+	order: -1;
+}
+.favorite-card > ons-list-item {
+	padding-inline: 7.5px !important;
+}
+.regular-card > ons-list-item {
+	padding-inline: 7.5px !important;
+}
+
+#main-list {
+	display: flex;
+	flex-flow: column;
+	overflow: visible !important;
+}
+#list-page {
+	height: 100% !important;
+
+}
+
+#list-page > ons-card {
+	margin: 0px !important;
+	height: 100% !important;
+	border-radius: 0px !important;
+}
+
+
+
+.ng-scope:has(#list-page) {
+	height: 100% !important;
+}
+.ng-scope:has(#list-page) > .list {
+	display: none;
+}
+@media(orientation: portrait){
+	#list-page {
+		height: calc(100% - 12px) !important;
+		padding-top: 12px !important;
+	}
+}
+
